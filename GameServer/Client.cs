@@ -17,7 +17,7 @@ namespace GameServer {
         public UDP udp;
 
         public Client(int _id) {
-            id = _id;
+            this.id = _id;
             tcp = new TCP(id);
             udp = new UDP(id);
         }
