@@ -12,7 +12,7 @@ namespace GameServer {
         private static bool isRunning = false;
 
         static void Main(string[] args) {
-            Console.Title = "Basic Game Server";
+            Console.Title = "Game Server";
 
             isRunning = true;
 
