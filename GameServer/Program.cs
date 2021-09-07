@@ -9,6 +9,9 @@ using System.Threading;
 
 namespace GameServer {
     class Program {
+        const int MAX_PLAYERS = 500;
+        const int PORT = 26950;
+
         private static bool isRunning = false;
 
         static void Main(string[] args) {
@@ -19,7 +22,7 @@ namespace GameServer {
             Thread mainThread = new Thread(new ThreadStart(MainThread));
             mainThread.Start();
 
-            Server.Start(100, 26950);
+            Server.Start(MAX_PLAYERS, PORT);
 
             //Console.ReadKey();
         }
