@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading.Tasks;
+using System.IO;
+using System.Threading;
+using System.Linq;
 
 namespace GameServer {
     class Server {
@@ -12,11 +16,10 @@ namespace GameServer {
         public delegate void PacketHandler(int _clientID, Packet _packet);
         public static Dictionary<int, PacketHandler> packetHandlers = new Dictionary<int, PacketHandler>();
 
-
         public static TcpListener tcpListener;
         public static UdpClient udpListener;
 
-        public static void Start(int _maxPlayers, int _port) {
+        public static async void Start(int _maxPlayers, int _port) {
             MaxPlayers = _maxPlayers;
             Port = _port;
 
@@ -30,10 +33,9 @@ namespace GameServer {
             udpListener = new UdpClient(Port);
             udpListener.BeginReceive(UDPReceiveCallback, null);
 
-
             Console.WriteLine($"Server Started.");
-            Console.WriteLine($"  Port: {Port}.");
-            Console.WriteLine($"  Max Players: {MaxPlayers}");
+            Console.WriteLine($"Port: {Port}.");
+            Console.WriteLine($"Max Players: {MaxPlayers}");
         }
 
         private static void TCPConnectCallback(IAsyncResult _result) {

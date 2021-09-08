@@ -5,6 +5,7 @@
  */
 
 using System;
+using System.Linq;
 using System.Threading;
 
 namespace GameServer {
@@ -24,7 +25,8 @@ namespace GameServer {
 
             Server.Start(MAX_PLAYERS, PORT);
 
-            //Console.ReadKey();
+            Thread consoleReadThread = new Thread(ConsoleReadThread);
+            consoleReadThread.Start();
         }
 
         private static void MainThread() {
@@ -43,6 +45,30 @@ namespace GameServer {
                     }
                 }
             } 
+        }
+
+        private static void ConsoleReadThread() {
+            //not sleeping
+
+            string input;
+            while ((input = Console.ReadLine()) != null) {
+                try {
+                    string[] inputArray = input.Split(' ');
+                    string cmd = inputArray[0];
+                    string[] cmdArgs = inputArray.Skip(1).ToArray();
+
+                    
+                    Console.Write($"Command: {cmd}");
+                    if (cmdArgs.Length > 0) {
+                        Console.Write($" Args: {cmdArgs[0]}");
+                    }
+
+                    Console.WriteLine();
+                    //*/
+                } catch {
+                    Console.WriteLine("Command is invalid");
+                }
+            }
         }
     }
 }
