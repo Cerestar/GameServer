@@ -56,10 +56,10 @@ namespace GameServer {
                     string[] inputArray = input.Split(' ');
                     string cmd = inputArray[0];
                     string[] cmdArgs = inputArray.Skip(1).ToArray();
-
                     
                     Console.Write($"Command: {cmd}");
                     if (cmdArgs.Length > 0) {
+                        //get args
                         Console.Write($" Args: {cmdArgs[0]}");
                     }
 

@@ -68,7 +68,6 @@ namespace GameServer {
                 _packet.Write(_player.id);
                 _packet.Write(_player.username);
                 _packet.Write(_player.position);
-                _packet.Write(_player.rotation);
 
                 SendTCPData(_toClient, _packet);
             }

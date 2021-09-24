@@ -24,9 +24,7 @@ namespace GameServer {
             for (int i = 0; i < _inputs.Length; i++) 
                 _inputs[i] = _packet.ReadBool();
 
-            Quaternion _rotation = _packet.ReadQuaternion();
-
-            Server.clients[_clientID].player.SetInput(_inputs, _rotation);
+            Server.clients[_clientID].player.SetInput(_inputs);
         }
     }
 }
