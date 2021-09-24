@@ -7,6 +7,7 @@ namespace GameServer {
     class Player {
         public int id;
         public string username;
+        public int gold;
 
         public Vector3 position;
         public Quaternion rotation;
@@ -41,6 +42,17 @@ namespace GameServer {
         }
 
         private void Move(Vector2 _inputDirection) {
+            Vector3 _up = new Vector3(0, 1, 0);
+            Vector3 _right = new Vector3(-1, 0, 0);
+
+            Vector3 _moveDirection = _right * _inputDirection.X + _up * _inputDirection.Y;
+            position += _moveDirection * moveSpeed;
+
+            ServerSend.PlayerPosition(this);
+            //ServerSend.PlayerRotation(this);
+        }
+
+        private void MoveFPS(Vector2 _inputDirection) {
             Vector3 _forward = Vector3.Transform(new Vector3(0, 0, 1), rotation);
             Vector3 _right = Vector3.Normalize(Vector3.Cross(_forward, new Vector3(0, 1, 0)));
 
@@ -51,9 +63,8 @@ namespace GameServer {
             ServerSend.PlayerRotation(this);
         }
 
-        public void SetInput(bool[] _inputs, Quaternion _rotation) {
+        public void SetInput(bool[] _inputs) {
             inputs = _inputs;
-            rotation = _rotation;
         }
     }
 }
