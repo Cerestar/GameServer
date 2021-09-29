@@ -175,7 +175,10 @@ namespace GameServer {
         private void Disconnect() {
             Console.WriteLine($"{tcp.socket.Client.RemoteEndPoint} has Disconnected");
 
-            player = null;
+            ThreadManager.ExecuteOnMainThread(() => {
+                //delete Gameobject
+                player = null;
+            });
 
             tcp.Disconnect();
             udp.Disconnect();

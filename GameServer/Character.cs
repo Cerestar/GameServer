@@ -10,6 +10,7 @@ namespace GameServer {
     }
 
     enum DIRECTION {
+        NONE,
         UP,
         DOWN,
         LEFT,
