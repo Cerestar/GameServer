@@ -45,26 +45,23 @@ namespace GameServer {
             Vector3 _up = new Vector3(0, 1, 0);
             Vector3 _right = new Vector3(-1, 0, 0);
 
+            //normailzes diagonal speed
+            if (_inputDirection.Y != 0 && _inputDirection.X != 0) {
+                _inputDirection.Y *= 0.75f;
+                _inputDirection.X *= 0.75f;
+            }
+
             Vector3 _moveDirection = _right * _inputDirection.X + _up * _inputDirection.Y;
+            
+
             position += _moveDirection * moveSpeed;
 
             ServerSend.PlayerPosition(this);
-            //ServerSend.PlayerRotation(this);
         }
-
-        private void MoveFPS(Vector2 _inputDirection) {
-            Vector3 _forward = Vector3.Transform(new Vector3(0, 0, 1), rotation);
-            Vector3 _right = Vector3.Normalize(Vector3.Cross(_forward, new Vector3(0, 1, 0)));
-
-            Vector3 _moveDirection = _right * _inputDirection.X + _forward * _inputDirection.Y;
-            position += _moveDirection * moveSpeed;
-
-            ServerSend.PlayerPosition(this);
-            ServerSend.PlayerRotation(this);
-        }
-
+        
         public void SetInput(bool[] _inputs) {
             inputs = _inputs;
         }
+        
     }
 }
