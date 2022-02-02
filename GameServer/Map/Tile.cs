@@ -5,8 +5,9 @@ using System.Text;
 namespace GameServer.Map {
     class Tile {
         int id;
-        int gfxId;
+        int[] gfxId;
         int mapObjId;
+        bool isAnimated;
 
         Coordinate mapCoord;
 

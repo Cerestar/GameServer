@@ -5,6 +5,13 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace GameServer.Map {
+
+    enum MAPTYPE { 
+        NORMAL,
+        ARENA,
+        PK
+    }
+
     class Map {
         int id;
         int mapName;
@@ -12,13 +19,10 @@ namespace GameServer.Map {
         int width;
         int height;
 
-        int type;
-        //0 - normal
-        //1 - arena
-        //2 - pk
+        MAPTYPE type;
 
         bool canWarp;
 
-        Coordinate defaultRespawn;
+        Coordinate defaultRespawn; //if player is our of bounds respawn them here
     }
 }
